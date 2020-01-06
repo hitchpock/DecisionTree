@@ -5,7 +5,7 @@ from math import log2
 class DecisionTree():
     """
     Дерево принятия решений. Работает на основе алгоритма ID3.
-    
+
     :param self.dt: словарь содержащий правила
     :param self.rules: строка с читабельным видом правил
     :param self.new_data: список содержащий новые данные, результат применения правил на сырые данные
@@ -19,7 +19,7 @@ class DecisionTree():
     def create_tree(self, filename, target_attribute):
         """
         Метод обработки обучающего набора данных и создание словаря правил.
-        
+
         :param filename: имя файла с обучающим набором
         :type filename: str
         :param target_attribute: целевой атрибут таблицы
@@ -33,11 +33,11 @@ class DecisionTree():
         attributes = [x for x in title if x != target_attribute]
 
         self.dt = id3(rows, target_attribute, attributes, attribute_values)
-    
+
     def generate_rules(self):
         """
         Создание строки вывода правил
-        
+
         :return: строка правил
         :rtype: str
         """
@@ -60,11 +60,11 @@ class DecisionTree():
             return rules
         self.rules = "\n".join(dfs(self.dt, 0))
         return self.rules
-    
+
     def use_tree(self, filename):
         """
         Применение правил к сырым данным.
-        
+
         :param filename: имя файла с данными
         :type filename: str
         """
@@ -78,7 +78,7 @@ class DecisionTree():
 def add_types(rows):
     """
     Присвоение порядкового номера всем значениям атрибутов.
-    
+
     :param rows: список примеров обучающего набора
     :type rows: list(list)
     :return: список обучающего набора
@@ -90,7 +90,7 @@ def add_types(rows):
 def attr_dict(rows, title):
     """
     Создание множества значений для каждого атрибута.
-    
+
     :param rows: список примеров обучающего набора
     :type rows: list(list)
     :param title: список атрибутов
@@ -109,7 +109,7 @@ def attr_dict(rows, title):
 def parse_csv(filename):
     """
     Парсинг csv файла.
-    
+
     :param filename: имя csv файла
     :type filename: string
     :return: title - список аргументов, rows - список строк
@@ -130,7 +130,7 @@ def parse_csv(filename):
 def check_all_same(examples, target_attribute):
     """
     Проверка. Если все примеры по заданному атрибуту имеют одинаковое значение, то возвращаем True.
-    
+
     :param examples: Двумерный массив с обучающим набором
     :type examples: двумерный массив
     :param target_attribute: целевой атрибут
@@ -150,7 +150,7 @@ def check_all_same(examples, target_attribute):
 def find_most_common(examples, target_attribute):
     """
     Возвращаем наиболее часто встречающееся значение атрибута.
-    
+
     :param examples: список примеров из обучающего набора
     :type examples: двумерный массив
     :param target_attribute: целевой атрибут
@@ -169,7 +169,7 @@ def find_most_common(examples, target_attribute):
 def filter_examples(examples, attribute, value):
     """
     Фильтруем список примеров, и оставляем те, у которых значение атрибута "attribute" равно "value".
-    
+
     :param examples: список примеров из обучающего набора
     :type examples: двумерный массив
     :param attribute: атрибут таблицы
@@ -189,7 +189,7 @@ def filter_examples(examples, attribute, value):
 def calc_entropy(examples, target_attribute):
     """
     Вычисление энтропии для списка примеров по заданному атрибуту.
-    
+
     :param examples: список примеров из обучающего набора
     :type examples: двумерный массив
     :param target_attribute: целевой атрибут
@@ -210,7 +210,7 @@ def calc_entropy(examples, target_attribute):
 def calc_info_gain(examples, test_attribute, target_attribute):
     """
     Вычисляем информационный прирост списка тренировочных случаев в соответсвии с проверочным атрибутом и целевым атрибутом.
-    
+
     :param examples: список примеров из обучающего набора
     :type examples: двумерный массив
     :param test_attribute: проверочный атрибут
@@ -242,7 +242,7 @@ def calc_info_gain(examples, test_attribute, target_attribute):
 def best_classifier(examples, attributes, target_attribute):
     """
     Наилучший классификационный атрибут.
-    
+
     :param examples: список примеров из обучающего набора
     :type examples: двумерный массив
     :param attributes: список атрибутов
@@ -265,7 +265,7 @@ def best_classifier(examples, attributes, target_attribute):
 def id3(examples, target_attribute, attributes, attribute_values):
     """
     Алгоритм id3.
-    
+
     :param examples: список примеров из обучающего набора
     :type examples: двумерный массив
     :param target_attribute: целевой атрибут
@@ -301,12 +301,11 @@ def id3(examples, target_attribute, attributes, attribute_values):
             dt[v] = c
     return dt
 
-###############################################
 
 def hashmap(rows, title):
     """
     Преобразование простых строк в словари.
-    
+
     :param rows: список строк с данными
     :type rows: list(list)
     :param title: список атрибутов
@@ -323,7 +322,7 @@ def hashmap(rows, title):
 def result_attribute(dct):
     """
     Достаем целевой атрибут из словаря правил.
-    
+
     :param dct: словарь правил
     :type dct: dict
     :return: целевой атрибут
@@ -340,7 +339,7 @@ def result_attribute(dct):
 def parse_dict(rules_dict, data, target_attribute):
     """
     Вычисление значения целевого атрибута.
-    
+
     :param rules_dict: словарь правил
     :type rules_dict: dict
     :param data: словарь характеристик
